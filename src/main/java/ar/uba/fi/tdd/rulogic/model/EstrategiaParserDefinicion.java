@@ -12,7 +12,7 @@ package ar.uba.fi.tdd.rulogic.model;
 public class EstrategiaParserDefinicion implements EstrategiaParser{
     public Evaluable parsearLinea(String linea) {
         String nombre = linea.split("\\(")[0].replace(" ", "");
-	String[] valores = linea.split("\\(")[1].replace(" ","").replace(").", "").split(",");
+	String[] valores = linea.split("\\(")[1].replace(" ","").replace(")", "").split(",");
         return new Definicion(nombre, valores);
     }
 }

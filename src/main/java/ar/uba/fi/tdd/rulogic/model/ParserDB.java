@@ -23,8 +23,16 @@ public class ParserDB {
     public Evaluable parsearEvaluable(String linea) {
         for (EstrategiaParser ep : listaParsersLinea) {
             Evaluable e = ep.parsearLinea(linea);
-            //TODO: TERMINAR
+            //TODO: Quitar punto
+            //Evaluable e = ep.parsearLinea(linea.replace(" *.$", ""));
+            //System.out.println(linea.replace(" *.$", ""));
+            if (e != null)
+                return e;
         }       
         return null;
+    }
+    
+    public Consulta parsearConsulta(String linea) {
+        return parserConsulta.parsearLinea(linea);
     }
 }

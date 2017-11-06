@@ -1,6 +1,7 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -23,22 +24,25 @@ public class KnowledgeBase {
         while(it.hasNext()) {
            String linea = it.next();
 
-           Evaluable ev = parserDB.parsearEvaluable(linea);
+           Evaluable e = parserDB.parsearEvaluable(linea.replaceAll("\\. *$", ""));
            
-           if (ev == null) {
+           if (e == null) {
                this.dbBroken = true;
                throw new RuntimeException("Error de parseo en una linea");
            }
            
-           diccionario.addEvaluable(ev);
+           this.diccionario.addEvaluable(e);
         }
+        
         return true;
     }
 
-	public boolean answer(String query) {
-            if (this.dbBroken)
-                throw new RuntimeException("La base de datos esta corrompida");
-            return true;
-	}
+    public boolean answer(String query) {
+        if (this.dbBroken)
+            throw new RuntimeException("La base de datos esta corrompida");
 
+        Consulta c = parserDB.parsearConsulta(query);
+        //System.out.println("xxx:" + c.getNombre() + "@" + Arrays.toString(c.getValores()));
+        return this.diccionario.consultar(c);
+    }
 }

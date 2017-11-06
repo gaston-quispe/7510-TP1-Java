@@ -8,14 +8,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
 public class KnowledgeBaseTest {
 
         private static List<String> db;
-        
-	@InjectMocks
-	private KnowledgeBase knowledgeBase;
+	private static KnowledgeBase kb;
 
         @BeforeClass
         public static void db() {
@@ -35,10 +32,9 @@ public class KnowledgeBaseTest {
             //db.add("hijo(X, Y) :- varon(X), padre(Y, X).");
             //db.add("hija(X, Y) :- mujer(X), padre(Y, X).");
             
-            KnowledgeBase kb = new KnowledgeBase();
+            kb = new KnowledgeBase();
             
-            kb.parseDB(db.iterator());
-            
+            kb.parseDB(db.iterator());    
         }
         
 	@Before
@@ -48,39 +44,37 @@ public class KnowledgeBaseTest {
 
 	@Test
 	public void test() {
-            Assert.assertTrue(true);
-		//Assert.assertTrue(this.knowledgeBase.answer("varon(javier)."));
+            Assert.assertTrue(kb.answer("varon(juan)"));
 	}
-//        
-//        @Test
-//        public void test_Varon_Juan_Should_be_true() {
-//
-//		Assert.assertTrue(this.knowledgeBase.answer("varon(juan)."));
-//	}
-//        
-//        @Test
-//        public void test_Varon_Maria_Should_be_false() {
-//
-//		Assert.assertFalse(this.knowledgeBase.answer("varon(maria)."));
-//        }
-//        
-//        @Test
-//        public void test_Mujer_Cecilia_Should_be_true() {
-//
-//		Assert.assertTrue(this.knowledgeBase.answer("mujer(cecilia)."));
-//	}
-//        
-//        @Test
-//        public void test_Padre_Juan_Pepe_Should_be_true() {
-//
-//		Assert.assertTrue(this.knowledgeBase.answer("padre(juan, pepe)."));
-//
-//	}
-//        
-//        @Test
-//        public void test_Padre_Mario_Pepe_Should_be_true() {
-//
-//		Assert.assertTrue(this.knowledgeBase.answer("padre(mario, pepe)."));
-//	}
+        
+        @Test
+        public void test_Varon_Juan_Should_be_true() {
+
+		Assert.assertTrue(kb.answer("varon(juan)"));
+	}
+        
+        @Test
+        public void test_Varon_Maria_Should_be_false() {
+
+		Assert.assertFalse(kb.answer("varon(maria)"));
+        }
+        
+        @Test
+        public void test_Mujer_Cecilia_Should_be_true() {
+
+		Assert.assertTrue(kb.answer("mujer(cecilia)"));
+	}
+        
+        @Test
+        public void test_Padre_Juan_Pepe_Should_be_true() {
+
+		Assert.assertTrue(kb.answer("padre(juan, pepe)"));
+	}
+        
+        @Test
+        public void test_Padre_Mario_Pepe_Should_be_false() {
+
+		Assert.assertFalse(kb.answer("padre(mario, pepe)"));
+	}
                 
 }

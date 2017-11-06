@@ -25,7 +25,7 @@ public class EstrategiaParserDefinicionUnitTest {
 
     @Test
     public void crear_definicion_juan_test() {
-        String linea = "varon(juan).";
+        String linea = "varon(juan)";
         Evaluable definicionParseada = estrategiaParserDefinicion.parsearLinea(linea);
 
         String[] valores = {"juan"};
@@ -35,7 +35,7 @@ public class EstrategiaParserDefinicionUnitTest {
 
     @Test
     public void crear_definicion_padre_test() {
-        String linea = "padre(roberto, alejandro).";
+        String linea = "padre(roberto, alejandro)";
         Evaluable definicionParseada = estrategiaParserDefinicion.parsearLinea(linea);
 
         String[] valores = {"roberto", "alejandro"};

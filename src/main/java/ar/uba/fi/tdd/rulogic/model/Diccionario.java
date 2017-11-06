@@ -5,17 +5,51 @@
  */
 package ar.uba.fi.tdd.rulogic.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author gaston
  */
 public class Diccionario {
 
-    public Diccionario() {
+    private List<Evaluable> evaluables;
+
+    @Override
+    public String toString() {
+        return "Diccionario{" + evaluables.size() + '}';
     }
 
-    void addEvaluable(Evaluable ev) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Diccionario other = (Diccionario) obj;
+        return true;
+    }
+    
+    public Diccionario() {
+        this.evaluables = new ArrayList<Evaluable>();
+    }
+
+    void addEvaluable(Evaluable e) {
+        this.evaluables.add(e);
+    }
+
+    boolean consultar(Consulta c) {
+        for (Evaluable e : evaluables)
+            if (e.evaluar(c, this))
+                return true;
+        
+        return false;
     }
     
 }

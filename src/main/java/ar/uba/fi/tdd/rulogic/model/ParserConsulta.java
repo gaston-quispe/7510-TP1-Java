@@ -20,10 +20,10 @@ public class ParserConsulta {
     
     public Consulta parsearLinea(String linea) {
         if (!esConsultaValida(linea))
-            throw new ParsingException();
+            return null;
         
         String nombre = linea.split("\\(")[0].replace(" ", "");
-	String[] valores = linea.split("\\(")[1].replace(" ","").replace(").", "").split(",");
+	String[] valores = linea.split("\\(")[1].replace(" ","").replace(")", "").split(",");
         return new Consulta(nombre, valores);
     }
 }
