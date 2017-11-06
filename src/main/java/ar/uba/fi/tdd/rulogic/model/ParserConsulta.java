@@ -5,6 +5,8 @@
  */
 package ar.uba.fi.tdd.rulogic.model;
 
+import java.util.Arrays;
+
 /**
  *
  * @author gaston

@@ -5,7 +5,6 @@
  */
 package ar.uba.fi.tdd.rulogic.model;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
 import java.util.Arrays;
 
 /**
