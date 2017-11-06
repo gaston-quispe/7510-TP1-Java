@@ -9,6 +9,6 @@ package ar.uba.fi.tdd.rulogic.model;
  *
  * @author gaston
  */
-class Evaluable {
-    
+public interface Evaluable {
+    public boolean evaluar(Consulta c, Diccionario d);
 }

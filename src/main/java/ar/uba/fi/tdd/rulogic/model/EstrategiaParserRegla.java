@@ -9,9 +9,10 @@ package ar.uba.fi.tdd.rulogic.model;
  *
  * @author gaston
  */
-public class ParserDefinicion implements IParserLinea{
+public class EstrategiaParserRegla implements EstrategiaParser{
 
-    public void parsearLinea() {
+    public Evaluable parsearLinea(String linea) {
+        //hijo(X, Y):-varon(X),padre(Y, X).
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

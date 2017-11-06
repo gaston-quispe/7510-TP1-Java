@@ -12,9 +12,9 @@ public class KnowledgeBase {
     
     public KnowledgeBase() {
         dbBroken = false;
-        List<IParserLinea> listaParsersLinea = new ArrayList<IParserLinea>();
-        listaParsersLinea.add(new ParserDefinicion());
-        listaParsersLinea.add(new ParserRegla());
+        List<EstrategiaParser> listaParsersLinea = new ArrayList<EstrategiaParser>();
+        listaParsersLinea.add(new EstrategiaParserDefinicion());
+        listaParsersLinea.add(new EstrategiaParserRegla());
         
         parserDB = new ParserDB(new ParserConsulta(), listaParsersLinea);
         diccionario = new Diccionario();    

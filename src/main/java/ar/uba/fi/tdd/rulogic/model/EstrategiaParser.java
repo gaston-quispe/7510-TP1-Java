@@ -9,6 +9,6 @@ package ar.uba.fi.tdd.rulogic.model;
  *
  * @author gaston
  */
-public interface IParserLinea {
-    public void parsearLinea();
+public interface EstrategiaParser {
+    public Evaluable parsearLinea(String linea);
 }

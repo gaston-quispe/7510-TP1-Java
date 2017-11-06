@@ -12,7 +12,7 @@ import java.util.List;
  * @author gaston
  */
 public class ParserDB {
-    public ParserDB(ParserConsulta pc, List<IParserLinea> listaParsersLinea) {
+    public ParserDB(ParserConsulta pc, List<EstrategiaParser> listaParsersLinea) {
         
     }
 
