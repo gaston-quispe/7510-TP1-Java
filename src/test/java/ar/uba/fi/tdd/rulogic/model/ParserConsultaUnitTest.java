@@ -57,7 +57,7 @@ public class ParserConsultaUnitTest {
         @Test
 	public void es_consulta_valida_test() {
             String linea = "toto(roberto,alejandro,pepe)";    
-            Assert.assertTrue(parserConsulta.esConsultaValida(linea));
+            Assert.assertTrue(parserConsulta.esLineaValida(linea));
 	}
                 
         @Test

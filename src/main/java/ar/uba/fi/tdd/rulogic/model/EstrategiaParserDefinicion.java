@@ -13,14 +13,13 @@ import java.util.regex.Pattern;
  */
 public class EstrategiaParserDefinicion implements EstrategiaParser{
     
-    //TODO: Quitar public
-    public boolean esDefinicionValida(String linea) {
+    public boolean esLineaValida(String linea) {
         String regex = "^\\s*[a-z_]+\\s*\\(((\\s*[a-z_]+\\s*),)*((\\s*[a-z_]+\\s*))\\)\\s*$";
         return Pattern.matches(regex, linea);
     }
     
     public Evaluable parsearLinea(String linea) {
-        if (!esDefinicionValida(linea))
+        if (!esLineaValida(linea))
             return null;
         
         String nombre = linea.split("\\(")[0].replace(" ", "");

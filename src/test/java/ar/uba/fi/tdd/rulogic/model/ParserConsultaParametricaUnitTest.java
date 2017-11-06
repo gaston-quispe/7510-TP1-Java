@@ -26,20 +26,13 @@ public class ParserConsultaParametricaUnitTest {
         @Test
 	public void es_consulta_parametrica_valida_test() {
             String linea = "padre(X, Y)";    
-            Assert.assertTrue(parserConsultaParametrica.esConsultaParametricaValida(linea));
+            Assert.assertTrue(parserConsultaParametrica.esLineaValida(linea));
 	}
         
         @Test
 	public void es_consulta_parametrica_invalida_test() {
             String linea = "padre(@, Y)";    
-            Assert.assertFalse(parserConsultaParametrica.esConsultaParametricaValida(linea));
+            Assert.assertFalse(parserConsultaParametrica.esLineaValida(linea));
 	}
-//                
-//        @Test
-//        public void intentar_parsear_consulta_invalida_test() {
-//            String linea = "padre(@,Y)";
-//            
-//            Consulta c = parserConsulta.parsearLinea(linea);
-//            Assert.assertNull(c);            
-//        }
+
 }

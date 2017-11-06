@@ -10,5 +10,6 @@ package ar.uba.fi.tdd.rulogic.model;
  * @author gaston
  */
 public interface EstrategiaParser {
+    public boolean esLineaValida(String linea);
     public Evaluable parsearLinea(String linea);
 }

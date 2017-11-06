@@ -5,15 +5,31 @@
  */
 package ar.uba.fi.tdd.rulogic.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /**
  *
  * @author gaston
  */
 class ConsultaParametrica {
 
-    ConsultaParametrica(String nombre, String[] valores) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String nombre;
+    private String[] parametros;
+    
+    ConsultaParametrica(String nombre, String[] parametros) {
+        this.nombre = nombre;
+        this.parametros = parametros;
     }
-    //TODO: TERMINAR
+    
+    public Consulta reemplazarParametros(HashMap<String,String> corresponencia) {
+            List<String> valores = new ArrayList<String>();
+
+            for (String p : parametros)
+                valores.add(corresponencia.get(p));                    
+
+            return new Consulta(nombre, valores.toArray(new String[valores.size()]));
+    }
 
 }

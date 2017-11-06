@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class EstrategiaParserRegla implements EstrategiaParser{
 
-    public boolean esReglaValida(String linea) {
+    public boolean esLineaValida(String linea) {
         String regex = "^.*:-.*$";
         if (Pattern.matches(regex, linea)) {
             String[] izq_der = linea.split(":-");
@@ -25,7 +25,7 @@ public class EstrategiaParserRegla implements EstrategiaParser{
             String regex_izq = "^\\s*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
             String regex_der = "^\\s*([a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),\\s*)*((\\s*[A-Z]+\\s*))\\)\\s*,\\s*)*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
             
-            if (regex_izq.matches(izq) && regex_der.matches(der))
+            if (Pattern.matches(regex_izq, izq) && Pattern.matches(regex_der, der))
                 return true;
         }
         return false;
@@ -33,7 +33,7 @@ public class EstrategiaParserRegla implements EstrategiaParser{
     
     
     public Evaluable parsearLinea(String linea) {
-        if (!esReglaValida(linea))
+        if (!esLineaValida(linea))
             return null;
         
         String sinespacios = linea.replace(" ", "");

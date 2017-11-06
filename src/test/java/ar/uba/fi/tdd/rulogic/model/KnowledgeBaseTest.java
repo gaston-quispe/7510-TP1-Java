@@ -29,8 +29,8 @@ public class KnowledgeBaseTest {
             db.add("padre(hector, maria).");
             db.add("padre(roberto, alejandro).");
             db.add("padre(roberto, cecilia).");
-            //db.add("hijo(X, Y) :- varon(X), padre(Y, X).");
-            //db.add("hija(X, Y) :- mujer(X), padre(Y, X).");
+            db.add("hijo(X, Y) :- varon(X), padre(Y, X).");
+            db.add("hija(X, Y) :- mujer(X), padre(Y, X).");
             
             kb = new KnowledgeBase();
             
@@ -42,6 +42,8 @@ public class KnowledgeBaseTest {
 		initMocks(this);
 	}
 
+        // TESTS DE DEFINICIONES
+        
 	@Test
 	public void test() {
             Assert.assertTrue(kb.answer("varon(juan)"));
@@ -49,32 +51,43 @@ public class KnowledgeBaseTest {
         
         @Test
         public void test_Varon_Juan_Should_be_true() {
-
 		Assert.assertTrue(kb.answer("varon(juan)"));
 	}
         
         @Test
         public void test_Varon_Maria_Should_be_false() {
-
 		Assert.assertFalse(kb.answer("varon(maria)"));
         }
         
         @Test
         public void test_Mujer_Cecilia_Should_be_true() {
-
 		Assert.assertTrue(kb.answer("mujer(cecilia)"));
 	}
         
         @Test
         public void test_Padre_Juan_Pepe_Should_be_true() {
-
 		Assert.assertTrue(kb.answer("padre(juan, pepe)"));
 	}
         
         @Test
         public void test_Padre_Mario_Pepe_Should_be_false() {
-
 		Assert.assertFalse(kb.answer("padre(mario, pepe)"));
 	}
-                
+        
+        
+        // TESTS DE REGLAS
+        @Test
+        public void hijo_pepe_juan_shoud_be_true_test() {
+            Assert.assertTrue(kb.answer("hijo(pepe, juan)"));
+        }
+        
+        @Test
+        public void hija_maria_roberto_should_be_false_test() {
+            Assert.assertFalse(kb.answer("hija(maria, roberto)"));
+        }
+        
+        @Test
+        public void hijo_pepe_juan_should_be_true_test() {
+            Assert.assertTrue(kb.answer("hijo(pepe, juan)"));
+        }                
 }

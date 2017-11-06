@@ -5,6 +5,8 @@
  */
 package ar.uba.fi.tdd.rulogic.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,12 +14,48 @@ import java.util.List;
  * @author gaston
  */
 public class Regla implements Evaluable {
-    //TODO: HACER
+    
+    private String nombre;
+    private String[] parametros;
+    private List<ConsultaParametrica> consultasParametricas; //TOD:Ver que este tipo no closione con los String[]
+    
     public Regla(String nombre, String[] parametros, List<ConsultaParametrica> consultasParametricas) {
+        this.nombre = nombre;
+        this.parametros = parametros;
+        this.consultasParametricas = consultasParametricas;
     }
-    //TODO: HACER
-    public boolean evaluar(Consulta c, Diccionario d) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    private HashMap<String, String> generarCorresponencia(String[] parametros, String[] valores) {
+        HashMap<String,String> corresponencia = new HashMap<String,String>();
+        for (int i = 0; i < parametros.length; i++) {
+            corresponencia.put(parametros[i], valores[i]);
+        }            
+        return corresponencia;
+    }
+        
+    private List<Consulta> generarNuevasConsultas(Consulta consultaOriginal) {
+        HashMap<String,String> corresponencia = this.generarCorresponencia(parametros, consultaOriginal.getValores());
+        List<Consulta> nuevasConsultas = new ArrayList<Consulta>();
+        
+        for(ConsultaParametrica cp : consultasParametricas) 
+            nuevasConsultas.add(cp.reemplazarParametros(corresponencia));
+        
+        return nuevasConsultas;
+    }
+    
+    public boolean evaluar(Consulta consultaOriginal, Diccionario diccionario) {
+        if (!consultaOriginal.getNombre().equals(this.nombre))
+            return false;
+        
+        List<Consulta> nuevasConsultas = generarNuevasConsultas(consultaOriginal);
+        
+        int exitos = 0;
+        
+        for(Consulta c : nuevasConsultas) 
+            if (diccionario.consultar(c))
+                exitos++;
+
+        return exitos == nuevasConsultas.size();
     }
     
 }

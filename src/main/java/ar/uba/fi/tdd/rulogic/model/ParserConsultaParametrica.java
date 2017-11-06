@@ -12,15 +12,15 @@ import java.util.regex.Pattern;
  * @author gaston
  */
 public class ParserConsultaParametrica {
-    // TODO: Cambiar a esLineaValida()
-    public boolean esConsultaParametricaValida(String linea) {
+    
+    public boolean esLineaValida(String linea) {
         String regex = "^\\s*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
         
         return Pattern.matches(regex, linea);
     }
     
     public ConsultaParametrica parsearLinea(String linea) {
-        if (!esConsultaParametricaValida(linea))
+        if (!esLineaValida(linea))
             return null;
         
         String nombre = linea.split("\\(")[0].replace(" ", "");
