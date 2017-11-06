@@ -1,14 +1,13 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 public class KnowledgeBase {
 
     private boolean dbBroken;
-    private final ParserDB parserDB;
+    private final Parser parserDB;
     private final Diccionario diccionario;
     
     public KnowledgeBase() {
@@ -17,14 +16,15 @@ public class KnowledgeBase {
         listaParsersLinea.add(new EstrategiaParserDefinicion());
         listaParsersLinea.add(new EstrategiaParserRegla());
         
-        parserDB = new ParserDB(new ParserConsulta(), listaParsersLinea);
+        parserDB = new Parser(new ParserConsulta(), listaParsersLinea);
         diccionario = new Diccionario();    
     }
     public boolean parseDB(Iterator<String> it) {
         while(it.hasNext()) {
            String linea = it.next();
 
-           Evaluable e = parserDB.parsearEvaluable(linea.replaceAll("\\. *$", ""));
+           String linea_sin_punto_al_final = linea.replaceAll("\\. *$", "");
+           Evaluable e = parserDB.parsearEvaluable(linea_sin_punto_al_final);
            
            if (e == null) {
                this.dbBroken = true;
@@ -42,7 +42,6 @@ public class KnowledgeBase {
             throw new RuntimeException("La base de datos esta corrompida");
 
         Consulta c = parserDB.parsearConsulta(query);
-        //System.out.println("xxx:" + c.getNombre() + "@" + Arrays.toString(c.getValores()));
         return this.diccionario.consultar(c);
     }
 }

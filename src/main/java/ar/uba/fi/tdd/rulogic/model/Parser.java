@@ -11,11 +11,11 @@ import java.util.List;
  *
  * @author gaston
  */
-public class ParserDB {
+public class Parser {
     private ParserConsulta parserConsulta;
     private List<EstrategiaParser> listaParsersLinea;
     
-    public ParserDB(ParserConsulta pc, List<EstrategiaParser> listaParsersLinea) {
+    public Parser(ParserConsulta pc, List<EstrategiaParser> listaParsersLinea) {
         this.parserConsulta = pc;
         this.listaParsersLinea = listaParsersLinea;
     }
@@ -23,9 +23,6 @@ public class ParserDB {
     public Evaluable parsearEvaluable(String linea) {
         for (EstrategiaParser ep : listaParsersLinea) {
             Evaluable e = ep.parsearLinea(linea);
-            //TODO: Quitar punto
-            //Evaluable e = ep.parsearLinea(linea.replace(" *.$", ""));
-            //System.out.println(linea.replace(" *.$", ""));
             if (e != null)
                 return e;
         }       

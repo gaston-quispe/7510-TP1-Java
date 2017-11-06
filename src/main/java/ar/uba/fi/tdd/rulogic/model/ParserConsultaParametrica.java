@@ -11,21 +11,20 @@ import java.util.regex.Pattern;
  *
  * @author gaston
  */
-public class EstrategiaParserDefinicion implements EstrategiaParser{
-    
-    //TODO: Quitar public
-    public boolean esDefinicionValida(String linea) {
-        String regex = "^\\s*[a-z_]+\\s*\\(((\\s*[a-z_]+\\s*),)*((\\s*[a-z_]+\\s*))\\)\\s*$";
+public class ParserConsultaParametrica {
+    // TODO: Cambiar a esLineaValida()
+    public boolean esConsultaParametricaValida(String linea) {
+        String regex = "^\\s*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
+        
         return Pattern.matches(regex, linea);
     }
     
-    public Evaluable parsearLinea(String linea) {
-        if (!esDefinicionValida(linea))
+    public ConsultaParametrica parsearLinea(String linea) {
+        if (!esConsultaParametricaValida(linea))
             return null;
         
         String nombre = linea.split("\\(")[0].replace(" ", "");
 	String[] valores = linea.split("\\(")[1].replace(" ","").replace(")", "").split(",");
-        return new Definicion(nombre, valores);
+        return new ConsultaParametrica(nombre, valores);
     }
 }
-    
