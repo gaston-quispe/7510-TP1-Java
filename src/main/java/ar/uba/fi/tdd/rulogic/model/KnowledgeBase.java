@@ -11,7 +11,7 @@ public class KnowledgeBase {
     private final Diccionario diccionario;
     
     public KnowledgeBase() {
-        dbBroken = false;
+        this.dbBroken = false;
         List<EstrategiaParser> listaParsersLinea = new ArrayList<EstrategiaParser>();
         listaParsersLinea.add(new EstrategiaParserDefinicion());
         listaParsersLinea.add(new EstrategiaParserRegla());
@@ -26,7 +26,7 @@ public class KnowledgeBase {
            Evaluable ev = parserDB.parsearEvaluable(linea);
            
            if (ev == null) {
-               dbBroken = true;
+               this.dbBroken = true;
                throw new RuntimeException("Error de parseo en una linea");
            }
            
@@ -36,7 +36,9 @@ public class KnowledgeBase {
     }
 
 	public boolean answer(String query) {
-		return true;
+            if (this.dbBroken)
+                throw new RuntimeException("La base de datos esta corrompida");
+            return true;
 	}
 
 }

@@ -12,11 +12,19 @@ import java.util.List;
  * @author gaston
  */
 public class ParserDB {
+    private ParserConsulta parserConsulta;
+    private List<EstrategiaParser> listaParsersLinea;
+    
     public ParserDB(ParserConsulta pc, List<EstrategiaParser> listaParsersLinea) {
-        
+        this.parserConsulta = pc;
+        this.listaParsersLinea = listaParsersLinea;
     }
 
-    Evaluable parsearEvaluable(String linea) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Evaluable parsearEvaluable(String linea) {
+        for (EstrategiaParser ep : listaParsersLinea) {
+            Evaluable e = ep.parsearLinea(linea);
+            //TODO: TERMINAR
+        }       
+        return null;
     }
 }

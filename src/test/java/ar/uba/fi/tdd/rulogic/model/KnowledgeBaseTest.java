@@ -32,12 +32,12 @@ public class KnowledgeBaseTest {
             db.add("padre(hector, maria).");
             db.add("padre(roberto, alejandro).");
             db.add("padre(roberto, cecilia).");
-            db.add("hijo(X, Y) :- varon(X), padre(Y, X).");
-            db.add("hija(X, Y) :- mujer(X), padre(Y, X).");
+            //db.add("hijo(X, Y) :- varon(X), padre(Y, X).");
+            //db.add("hija(X, Y) :- mujer(X), padre(Y, X).");
             
-            //KnowledgeBase kb = new KnowledgeBase();
+            KnowledgeBase kb = new KnowledgeBase();
             
-            //kb.parseDB(db.iterator());
+            kb.parseDB(db.iterator());
             
         }
         
