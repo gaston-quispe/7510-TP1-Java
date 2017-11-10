@@ -28,7 +28,7 @@ public class KnowledgeBase {
            
            if (e == null) {
                this.dbBroken = true;
-               throw new RuntimeException("Error de parseo en una linea");
+               throw new ParsingException();
            }
            
            this.diccionario.addEvaluable(e);
@@ -39,7 +39,7 @@ public class KnowledgeBase {
 
     public boolean answer(String query) {
         if (this.dbBroken)
-            throw new RuntimeException("La base de datos esta corrompida");
+            throw new DatabaseBrokenException();
 
         Consulta c = parserDB.parsearConsulta(query);
         return this.diccionario.consultar(c);

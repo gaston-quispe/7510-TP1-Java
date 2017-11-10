@@ -1,5 +1,7 @@
 package ar.uba.fi.tdd.rulogic.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Assert;
@@ -24,47 +26,45 @@ public class ParserReglaUnitTest {
 	}
 
 	@Test
-	public void parsear_consulta_juan_con_un_valor_test() {
-                String linea = "varon(juan)";
-                Consulta consultaParseada = parserConsulta.parsearLinea(linea);
-                
-                String[] valores = {"juan"};
-                Consulta consultaEsperada = new Consulta("varon", valores);
-		Assert.assertTrue(consultaParseada.equals(consultaEsperada));
+	public void crear_regla_valida() {
+            String[] parametros = {"X", "Y"};
+            List<ConsultaParametrica> listaCP = new ArrayList<ConsultaParametrica>();
+            listaCP.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP.add(new ConsultaParametrica("padre", new String[]{"Y", "X"}));
+
+            Evaluable regla = new Regla("hijo", parametros, listaCP);
+            Assert.assertNotNull(regla);
 	}
         
         @Test
-	public void parsear_consulta_roberto_con_dos_valores_test() {
-                String linea = "padre(roberto, alejandro)";
-                Consulta consultaParseada = parserConsulta.parsearLinea(linea);
-                
-                String[] valores = {"roberto", "alejandro"};
-                Consulta consultaEsperada = new Consulta("padre", valores);
-		Assert.assertTrue(consultaParseada.equals(consultaEsperada));
-	}
-        
-        @Test
-	public void parsear_consulta_maria_con_tres_valores_test() {
-                String linea = "maria(roberto, alejandro, pepe)";
-                Consulta consultaParseada = parserConsulta.parsearLinea(linea);
-                
-                String[] valores = {"roberto", "alejandro", "pepe"};
-                Consulta consultaEsperada = new Consulta("maria", valores);
-                
-		Assert.assertTrue(consultaParseada.equals(consultaEsperada));
-	}
-        
-        @Test
-	public void es_consulta_valida_test() {
-            String linea = "toto(roberto,alejandro,pepe)";    
-            Assert.assertTrue(parserConsulta.esLineaValida(linea));
-	}
-                
-        @Test
-        public void intentar_parsear_consulta_invalida_test() {
-            String linea = "maria@roberto, alejandro, pepe)";
+	public void dos_reglas_deberian_ser_diferentes_test() {
+            String[] parametros1 = {"X", "Y"};
+            List<ConsultaParametrica> listaCP1 = new ArrayList<ConsultaParametrica>();
+            listaCP1.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP1.add(new ConsultaParametrica("padre", new String[]{"Y", "X"}));
+            Evaluable regla1 = new Regla("hijo", parametros1, listaCP1);
             
-            Consulta c = parserConsulta.parsearLinea(linea);
-            Assert.assertNull(c);            
-        }
+            String[] parametros2 = {"X", "Y"};
+            List<ConsultaParametrica> listaCP2 = new ArrayList<ConsultaParametrica>();
+            listaCP2.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP2.add(new ConsultaParametrica("padre", new String[]{"Y", "X"}));
+            Evaluable regla2 = new Regla("hijoxxx", parametros2, listaCP2);
+            Assert.assertNotEquals(regla1,regla2);
+	}
+        
+        @Test
+	public void dos_reglas_deberian_ser_diferentes_2_test() {
+            String[] parametros1 = {"X", "Y"};
+            List<ConsultaParametrica> listaCP1 = new ArrayList<ConsultaParametrica>();
+            listaCP1.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP1.add(new ConsultaParametrica("padre", new String[]{"Y", "X"}));
+            Evaluable regla1 = new Regla("hijo", parametros1, listaCP1);
+            
+            String[] parametros2 = {"X", "Y"};
+            List<ConsultaParametrica> listaCP2 = new ArrayList<ConsultaParametrica>();
+            listaCP2.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP2.add(new ConsultaParametrica("padre", new String[]{"Y", "X", "Z"}));
+            Evaluable regla2 = new Regla("hijo", parametros2, listaCP2);
+            Assert.assertNotEquals(regla1,regla2);
+	}
 }

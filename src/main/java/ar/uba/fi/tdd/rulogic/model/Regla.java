@@ -6,6 +6,7 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Regla implements Evaluable {
     
     private String nombre;
     private String[] parametros;
-    private List<ConsultaParametrica> consultasParametricas; //TOD:Ver que este tipo no closione con los String[]
+    private List<ConsultaParametrica> consultasParametricas;
     
     public Regla(String nombre, String[] parametros, List<ConsultaParametrica> consultasParametricas) {
         this.nombre = nombre;
@@ -56,6 +57,18 @@ public class Regla implements Evaluable {
                 exitos++;
 
         return exitos == nuevasConsultas.size();
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        Regla r = (Regla)o;
+        if (!this.nombre.equals(r.nombre))
+            return false;
+        
+        if (!Arrays.equals(this.parametros, r.parametros))
+            return false;
+        
+        return this.consultasParametricas.equals(r.consultasParametricas);
     }
     
 }

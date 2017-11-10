@@ -6,6 +6,7 @@
 package ar.uba.fi.tdd.rulogic.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,4 +33,9 @@ class ConsultaParametrica {
             return new Consulta(nombre, valores.toArray(new String[valores.size()]));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        ConsultaParametrica c = (ConsultaParametrica)o;
+        return this.nombre.equals(c.nombre) && Arrays.equals(this.parametros, c.parametros);
+    }
 }

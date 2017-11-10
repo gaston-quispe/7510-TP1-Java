@@ -19,11 +19,36 @@ public class DefinicionUnitTest {
 	}
 
 	@Test
-	public void consultar_definicion_test() {
+	public void consulta_definicion_deberia_ser_true_test() {
             Evaluable d = new Definicion("padre", new String[]{"roberto", "alejandro"});
             Consulta c = new Consulta("padre", new String[]{"roberto", "alejandro"});
             
             Assert.assertTrue(d.evaluar(c, null));
 	}
+        
+        @Test
+        public void consulta_definicion_deberia_ser_false() {
+            Evaluable d = new Definicion("padre", new String[]{"roberto", "alejandro"});
+            Consulta c = new Consulta("padre", new String[]{"roberto", "juan"});
+            
+            Assert.assertFalse(d.evaluar(c, null));            
+        }
+        
+                
+        @Test
+        public void consulta_definicion_deberia_ser_false2() {
+            Evaluable d = new Definicion("padre", new String[]{"roberto", "alejandro"});
+            Consulta c = new Consulta("abuelo", new String[]{"roberto", "alejandro"});
+            
+            Assert.assertFalse(d.evaluar(c, null));            
+        }
+        
+        @Test
+        public void consulta_definicion_deberia_ser_false3() {
+            Evaluable d = new Definicion("padre", new String[]{"roberto", "alejandro"});
+            Consulta c = new Consulta("padre", new String[]{"roberto", "alejandro", "pepe"});
+            
+            Assert.assertFalse(d.evaluar(c, null));            
+        }
         
 }

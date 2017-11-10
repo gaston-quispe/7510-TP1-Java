@@ -29,10 +29,27 @@ public class ParserConsultaParametricaUnitTest {
             Assert.assertTrue(parserConsultaParametrica.esLineaValida(linea));
 	}
         
+                
+        @Test
+	public void crear_consulta_parametrica_valida_test() {
+            String linea = "padre(X, Y)";
+            ConsultaParametrica consulta_parametrica_parseada = parserConsultaParametrica.parsearLinea(linea);
+            ConsultaParametrica consulta_parametrica_esperada = new ConsultaParametrica("padre", new String[]{"X", "Y"});
+            
+            Assert.assertEquals(consulta_parametrica_parseada, consulta_parametrica_esperada);
+	}
+        
         @Test
 	public void es_consulta_parametrica_invalida_test() {
             String linea = "padre(@, Y)";    
             Assert.assertFalse(parserConsultaParametrica.esLineaValida(linea));
+	}
+        
+        @Test
+	public void crear_consulta_parametrica_invalida_test() {
+            String linea = "padre(@, Y)";
+            ConsultaParametrica cp = parserConsultaParametrica.parsearLinea(linea);
+            Assert.assertNull(cp);
 	}
 
 }

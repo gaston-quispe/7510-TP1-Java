@@ -61,6 +61,12 @@ public class ParserConsultaUnitTest {
 	}
                 
         @Test
+	public void es_consulta_invalida_test() {
+            String linea = "toto@@roberto,alejandro,pepe)";    
+            Assert.assertFalse(parserConsulta.esLineaValida(linea));
+	}
+                
+        @Test
         public void intentar_parsear_consulta_invalida_test() {
             String linea = "maria@roberto, alejandro, pepe)";
             

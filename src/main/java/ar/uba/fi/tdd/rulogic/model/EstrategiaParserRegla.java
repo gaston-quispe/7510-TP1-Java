@@ -22,8 +22,8 @@ public class EstrategiaParserRegla implements EstrategiaParser{
             String izq = izq_der[0];
             String der = izq_der[1];
             
-            String regex_izq = "^\\s*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
-            String regex_der = "^\\s*([a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),\\s*)*((\\s*[A-Z]+\\s*))\\)\\s*,\\s*)*[a-z_]+\\s*\\(((\\s*[A-Z]+\\s*),)*((\\s*[A-Z]+\\s*))\\)\\s*$";
+            String regex_izq = "^\\s*[a-z_]+\\s*\\(((\\s*[A-Z]\\s*),)*((\\s*[A-Z]\\s*))\\)\\s*$";
+            String regex_der = "^\\s*([a-z_]+\\s*\\(((\\s*[A-Z]\\s*),\\s*)*((\\s*[A-Z]\\s*))\\)\\s*,\\s*)*[a-z_]+\\s*\\(((\\s*[A-Z]\\s*),)*((\\s*[A-Z]\\s*))\\)\\s*$";
             
             if (Pattern.matches(regex_izq, izq) && Pattern.matches(regex_der, der))
                 return true;

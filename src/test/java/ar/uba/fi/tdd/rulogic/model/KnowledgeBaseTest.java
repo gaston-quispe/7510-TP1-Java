@@ -7,13 +7,18 @@ import static org.mockito.MockitoAnnotations.initMocks;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class KnowledgeBaseTest {
 
         private static List<String> db;
 	private static KnowledgeBase kb;
 
+        @Rule
+        public ExpectedException thrown = ExpectedException.none();
+        
         @BeforeClass
         public static void db() {
             db = new ArrayList<String>();
@@ -89,5 +94,58 @@ public class KnowledgeBaseTest {
         @Test
         public void hijo_pepe_juan_should_be_true_test() {
             Assert.assertTrue(kb.answer("hijo(pepe, juan)"));
-        }                
+        }
+        
+        @Test
+        public void crear_base_de_datos_rota_deberia_lanzar_excepcion_test() {
+            List<String> db_rota = new ArrayList<String>();
+            db_rota.add("varon(juan).");
+            db_rota.add("varon(pepe).");
+            db_rota.add("varon(hector).");
+            db_rota.add("varon(roberto).");
+            db_rota.add("varon(alejandro).");
+            db_rota.add("mujer(maria).");
+            db_rota.add("mujer(cecilia).");
+            db_rota.add("padr");
+            db_rota.add("pn, pepa).");
+            db_rota.add("padre(hector, maria@@@).");
+            db_rota.add("padre(roberto, alejandro).");
+            db_rota.add("padre(roberto, cecilia).");
+            db_rota.add("hijo(X, Y) :- vd(X), padre(Y, X).");
+            db_rota.add("hija(X, Y) :- mujer(X), padre(Y, X).");
+            
+            KnowledgeBase kb2 = new KnowledgeBase();
+            
+            thrown.expect(ParsingException.class);
+            kb2.parseDB(db_rota.iterator());    
+        }
+        
+                @Test
+        public void consultar_base_de_datos_rota_deberia_lanzar_excepcion_test() {
+            List<String> db_rota = new ArrayList<String>();
+            db_rota.add("varon(juan).");
+            db_rota.add("varon(pepe).");
+            db_rota.add("varon(hector).");
+            db_rota.add("varon(roberto).");
+            db_rota.add("varon(alejandro).");
+            db_rota.add("mujer(maria).");
+            db_rota.add("mujer(cecilia).");
+            db_rota.add("padr");
+            db_rota.add("pn, pepa).");
+            db_rota.add("padre(hector, maria@@@).");
+            db_rota.add("padre(roberto, alejandro).");
+            db_rota.add("padre(roberto, cecilia).");
+            db_rota.add("hijo(X, Y) :- vd(X), padre(Y, X).");
+            db_rota.add("hija(X, Y) :- mujer(X), padre(Y, X).");
+            
+            KnowledgeBase kb_con_db_rota = new KnowledgeBase();
+            
+            try {
+                kb_con_db_rota.parseDB(db_rota.iterator());
+            }
+            catch (ParsingException e) {
+                thrown.expect(DatabaseBrokenException.class);
+                kb_con_db_rota.answer("varon(juan)");
+            }
+        }
 }
