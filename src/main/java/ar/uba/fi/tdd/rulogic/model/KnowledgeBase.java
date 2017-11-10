@@ -20,6 +20,7 @@ public class KnowledgeBase {
         diccionario = new Diccionario();    
     }
     public boolean parseDB(Iterator<String> it) {
+        int numero_linea = 1;
         while(it.hasNext()) {
            String linea = it.next();
 
@@ -28,10 +29,11 @@ public class KnowledgeBase {
            
            if (e == null) {
                this.dbBroken = true;
-               throw new ParsingException();
+               throw new ParsingException("Error de parseo en la linea numero " + numero_linea + ": " + linea);
            }
            
            this.diccionario.addEvaluable(e);
+           numero_linea++;
         }
         
         return true;
@@ -40,8 +42,12 @@ public class KnowledgeBase {
     public boolean answer(String query) {
         if (this.dbBroken)
             throw new DatabaseBrokenException();
-
+        
         Consulta c = parserDB.parsearConsulta(query);
+        
+        if (c == null)
+            throw new InvalidQueryException();
+        
         return this.diccionario.consultar(c);
     }
 }

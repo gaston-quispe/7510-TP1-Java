@@ -51,4 +51,23 @@ public class DefinicionUnitTest {
             Assert.assertFalse(d.evaluar(c, null));            
         }
         
+        @Test
+	public void son_definiciones_diferentes_1() {
+            Definicion d1 = new Definicion("varon", new String[]{"juan"});
+            Definicion d2 = new Definicion("varon", new String[]{"marcos"});
+            Assert.assertNotEquals(d1, d2);
+	}
+        
+        @Test
+	public void son_definiciones_diferentes_2() {
+            Definicion d1 = new Definicion("varon", new String[]{"juan"});
+            Definicion d2 = new Definicion("mujer", new String[]{"juan"});
+            Assert.assertNotEquals(d1, d2);
+	}
+        @Test
+	public void son_definiciones_diferentes_3() {
+            Definicion d1 = new Definicion("varon", new String[]{"juan"});
+            Definicion d2 = new Definicion("mujer", new String[]{"marcos"});
+            Assert.assertNotEquals(d1, d2);
+	}
 }

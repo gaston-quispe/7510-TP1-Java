@@ -27,6 +27,9 @@ public class Regla implements Evaluable {
     }
     
     private HashMap<String, String> generarCorresponencia(String[] parametros, String[] valores) {
+        if (parametros.length != valores.length)
+            return null;
+        
         HashMap<String,String> corresponencia = new HashMap<String,String>();
         for (int i = 0; i < parametros.length; i++) {
             corresponencia.put(parametros[i], valores[i]);
@@ -36,6 +39,10 @@ public class Regla implements Evaluable {
         
     private List<Consulta> generarNuevasConsultas(Consulta consultaOriginal) {
         HashMap<String,String> corresponencia = this.generarCorresponencia(parametros, consultaOriginal.getValores());
+        
+        if (corresponencia == null)
+            return null;
+        
         List<Consulta> nuevasConsultas = new ArrayList<Consulta>();
         
         for(ConsultaParametrica cp : consultasParametricas) 
@@ -49,6 +56,9 @@ public class Regla implements Evaluable {
             return false;
         
         List<Consulta> nuevasConsultas = generarNuevasConsultas(consultaOriginal);
+        
+        if (nuevasConsultas == null)
+            return false;
         
         int exitos = 0;
         

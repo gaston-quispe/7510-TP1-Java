@@ -51,5 +51,25 @@ public class ParserConsultaParametricaUnitTest {
             ConsultaParametrica cp = parserConsultaParametrica.parsearLinea(linea);
             Assert.assertNull(cp);
 	}
+        
+        @Test
+	public void son_consultas_parametricas_diferentes_1() {
+            ConsultaParametrica c1 = new ConsultaParametrica("padre", new String[]{"X", "Y"});
+            ConsultaParametrica c2 = new ConsultaParametrica("padre", new String[]{"X", "Z"});
+            Assert.assertNotEquals(c1, c2);
+	}
+        
+        @Test
+	public void son_consultas_parametricas_diferentes_2() {
+            ConsultaParametrica c1 = new ConsultaParametrica("padre", new String[]{"X", "Y"});
+            ConsultaParametrica c2 = new ConsultaParametrica("madre", new String[]{"X", "Y"});
+            Assert.assertNotEquals(c1, c2);
+	}
+        @Test
+	public void son_consultas_parametricas_diferentes_3() {
+            ConsultaParametrica c1 = new ConsultaParametrica("padre", new String[]{"X", "Y"});
+            ConsultaParametrica c2 = new ConsultaParametrica("madre", new String[]{"X", "Z"});
+            Assert.assertNotEquals(c1, c2);
+	}
 
 }

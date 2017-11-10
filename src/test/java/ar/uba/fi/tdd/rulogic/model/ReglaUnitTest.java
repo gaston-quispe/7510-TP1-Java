@@ -8,16 +8,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.InjectMocks;
 
-public class ParserReglaUnitTest {
-
-    	@InjectMocks
-        private static ParserConsulta parserConsulta;
+public class ReglaUnitTest {
 
         @BeforeClass
-        public static void beforeClass() {
-            parserConsulta = new ParserConsulta();            
+        public static void beforeClass() {        
         }
         
 	@Before
@@ -36,7 +31,7 @@ public class ParserReglaUnitTest {
             Assert.assertNotNull(regla);
 	}
         
-        @Test
+                @Test
 	public void dos_reglas_deberian_ser_diferentes_test() {
             String[] parametros1 = {"X", "Y"};
             List<ConsultaParametrica> listaCP1 = new ArrayList<ConsultaParametrica>();
@@ -64,6 +59,22 @@ public class ParserReglaUnitTest {
             List<ConsultaParametrica> listaCP2 = new ArrayList<ConsultaParametrica>();
             listaCP2.add(new ConsultaParametrica("varon", new String[]{"X"}));
             listaCP2.add(new ConsultaParametrica("padre", new String[]{"Y", "X", "Z"}));
+            Evaluable regla2 = new Regla("hijo", parametros2, listaCP2);
+            Assert.assertNotEquals(regla1,regla2);
+	}
+        
+        @Test
+	public void dos_reglas_deberian_ser_diferentes_3_test() {
+            String[] parametros1 = {"X", "Y"};
+            List<ConsultaParametrica> listaCP1 = new ArrayList<ConsultaParametrica>();
+            listaCP1.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP1.add(new ConsultaParametrica("padre", new String[]{"Y", "X"}));
+            Evaluable regla1 = new Regla("hijo", parametros1, listaCP1);
+            
+            String[] parametros2 = {"X", "Z"};
+            List<ConsultaParametrica> listaCP2 = new ArrayList<ConsultaParametrica>();
+            listaCP2.add(new ConsultaParametrica("varon", new String[]{"X"}));
+            listaCP2.add(new ConsultaParametrica("padre", new String[]{"Y", "Z"}));
             Evaluable regla2 = new Regla("hijo", parametros2, listaCP2);
             Assert.assertNotEquals(regla1,regla2);
 	}

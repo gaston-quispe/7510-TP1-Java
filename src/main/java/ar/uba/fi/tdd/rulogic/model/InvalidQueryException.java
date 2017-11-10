@@ -9,8 +9,6 @@ package ar.uba.fi.tdd.rulogic.model;
  *
  * @author gaston
  */
-public class ParsingException extends RuntimeException {
-    public ParsingException(String message) {
-        super(message);
-    }    
+public class InvalidQueryException extends RuntimeException{
+    
 }

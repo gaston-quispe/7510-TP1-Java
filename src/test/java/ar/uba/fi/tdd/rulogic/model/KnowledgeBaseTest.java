@@ -2,6 +2,7 @@ package ar.uba.fi.tdd.rulogic.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 import org.junit.Assert;
@@ -97,7 +98,7 @@ public class KnowledgeBaseTest {
         }
         
         @Test
-        public void crear_base_de_datos_rota_deberia_lanzar_excepcion_test() {
+        public void crear_base_de_datos_rota_en_la_linea_8_deberia_lanzar_excepcion_test() {
             List<String> db_rota = new ArrayList<String>();
             db_rota.add("varon(juan).");
             db_rota.add("varon(pepe).");
@@ -117,10 +118,11 @@ public class KnowledgeBaseTest {
             KnowledgeBase kb2 = new KnowledgeBase();
             
             thrown.expect(ParsingException.class);
+            thrown.expectMessage(containsString("Error de parseo en la linea numero " + 8 + ": " + "padr"));
             kb2.parseDB(db_rota.iterator());    
         }
         
-                @Test
+        @Test
         public void consultar_base_de_datos_rota_deberia_lanzar_excepcion_test() {
             List<String> db_rota = new ArrayList<String>();
             db_rota.add("varon(juan).");

@@ -11,6 +11,7 @@
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/ParsingException.java
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/App.java
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/Regla.java
+/home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/InvalidQueryException.java
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/ParserConsulta.java
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/ParserConsultaParametrica.java
 /home/gaston/Documentos/FACU/TD/repos/7510-TP1-Java/src/main/java/ar/uba/fi/tdd/rulogic/model/Evaluable.java
